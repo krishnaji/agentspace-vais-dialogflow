@@ -1,0 +1,86 @@
+<!-- shkhose@ -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dialogflow Embedded with Token Input</title>
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      --df-messenger-font-color: #000;
+      --df-messenger-font-family: Google Sans;
+      --df-messenger-chat-background: #f3f6fc;
+      --df-messenger-message-user-background: #d3e3fd;
+      --df-messenger-message-bot-background: #fff;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    #token-input-container {
+      margin-bottom: 10px; /* Add some space below the input area */
+    }
+
+    #token-input {
+      width: 300px; /* Adjust width as needed */
+      padding: 8px;
+      margin-right: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #set-token-button {
+      padding: 8px 12px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="token-input-container">
+    <input type="text" id="token-input" placeholder="Paste access token here">
+    <button id="set-token-button">Set Token</button>
+  </div>
+
+  <df-messenger
+    project-id="genai-380800"
+    agent-id="547238c9-9fd2-4ad3-a5ed-b0932233421e"
+    language-code="en"
+     max-query-length="-1"
+      access-token-name="access_token"
+      >
+    <df-messenger-chat-bubble chat-title="sfdc-agent"></df-messenger-chat-bubble>
+  </df-messenger>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const setTokenButton = document.getElementById('set-token-button');
+      const tokenInput = document.getElementById('token-input');
+      const dfMessenger = document.querySelector('df-messenger');
+
+      setTokenButton.addEventListener('click', () => {
+        const token = tokenInput.value.trim();
+        if (token) {
+          // dfMessenger.setAttribute('access_token', token);
+          // dfMessenger.authSettings = { provider: 'custom' }
+          dfMessenger.accessToken = token;
+           console.log("token set to:", token) //for debugging purposes
+        } else {
+          alert('Please enter a token.');
+        }
+      });
+
+      //Optionally listen for when the df-messenger is loaded, and do other operations
+      dfMessenger.addEventListener('df-messenger-loaded', (event) => {
+        console.log("df-messenger-loaded")
+      });
+    });
+  </script>
+
+</body>
+</html>
