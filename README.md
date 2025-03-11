@@ -2,7 +2,7 @@
 
 This project demonstrates how to integrate Dialogflow CX with Salesforce using Workforce Identity Federation and the STS (Security Token Service) API for secure authentication. It allows users to authenticate with Salesforce, obtain a Google Cloud access token, and then use that token to interact with a Dialogflow CX agent embedded in a web page.
 
-(Gemini Code Assist generted readme)
+(Gemini Code Assist generated readme)
 
 ![Dialogflow Integration](demo.gif)
 
